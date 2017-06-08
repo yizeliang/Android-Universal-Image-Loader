@@ -26,6 +26,7 @@ import com.nostra13.universalimageloader.core.assist.ViewScaleType;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
 
 /**
+ * 解码时候的一些配置
  * Contains needed information for decoding image to Bitmap
  *
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
@@ -36,9 +37,19 @@ public class ImageDecodingInfo {
 	private final String imageKey;
 	private final String imageUri;
 	private final String originalImageUri;
+	/**
+	 * 目标大小
+	 */
 	private final ImageSize targetSize;
 
+	/**
+	 * BitMap的处理机制(解码的时候的处理)
+	 */
 	private final ImageScaleType imageScaleType;
+
+	/**
+	 * Imageview的缩放类型
+	 */
 	private final ViewScaleType viewScaleType;
 
 	private final ImageDownloader downloader;

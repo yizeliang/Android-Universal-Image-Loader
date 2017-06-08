@@ -63,25 +63,58 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
  * @since 1.0.0
  */
 public final class DisplayImageOptions {
-
+	/**
+	 * 加载中图片
+	 */
 	private final int imageResOnLoading;
+	/**
+	 * 空URL 图片
+	 */
 	private final int imageResForEmptyUri;
+	/**
+	 * 加载失败图片
+	 */
 	private final int imageResOnFail;
 	private final Drawable imageOnLoading;
 	private final Drawable imageForEmptyUri;
 	private final Drawable imageOnFail;
+
+	/**
+	 * 是否重新设置View,在加载之前(不太明白)
+	 */
 	private final boolean resetViewBeforeLoading;
+	/**
+	 * 在内存中缓存?
+	 */
 	private final boolean cacheInMemory;
+	/**
+	 * 在硬盘中缓存?
+	 */
 	private final boolean cacheOnDisk;
+	/**
+	 * 解码时缩放类型
+	 */
 	private final ImageScaleType imageScaleType;
+	/**
+	 * 解码配置,SDK_API
+	 * @{link android.graphics.BitmapFactory}
+	 */
 	private final Options decodingOptions;
 	private final int delayBeforeLoading;
 	private final boolean considerExifParams;
+	/**
+	 * 下载器额外参数
+	 */
 	private final Object extraForDownloader;
+
 	private final BitmapProcessor preProcessor;
 	private final BitmapProcessor postProcessor;
+
 	private final BitmapDisplayer displayer;
 	private final Handler handler;
+	/**
+	 * 异步该值始终为false
+	 */
 	private final boolean isSyncLoading;
 
 	private DisplayImageOptions(Builder builder) {

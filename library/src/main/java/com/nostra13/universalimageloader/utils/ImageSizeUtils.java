@@ -95,7 +95,7 @@ public final class ImageSizeUtils {
 		final int targetHeight = targetSize.getHeight();
 
 		int scale = 1;
-
+		//根据scaleType类型,处理图片大小
 		switch (viewScaleType) {
 			case FIT_INSIDE:
 				if (powerOf2Scale) {
@@ -143,8 +143,8 @@ public final class ImageSizeUtils {
 	}
 
 	/**
-	 * Computes minimal sample size for downscaling image so result image size won't exceed max acceptable OpenGL
-	 * texture size.<br />
+	 * 计算最小图像尺寸,使得结果图像大小不会超过最大openGL尺寸
+	 * Computes minimal sample size for downscaling image so result image size won't exceed max acceptable OpenGL texture size.<br />
 	 * We can't create Bitmap in memory with size exceed max texture size (usually this is 2048x2048) so this method
 	 * calculate minimal sample size which should be applied to image to fit into these limits.
 	 *

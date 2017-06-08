@@ -126,6 +126,13 @@ public class ImageViewAware extends ViewAware {
 		((ImageView) view).setImageBitmap(bitmap);
 	}
 
+	/**
+	 * 利用反射获取ImageView的最大宽度和高度
+	 * 还真是反射无处不在
+	 * @param object
+	 * @param fieldName
+     * @return
+     */
 	private static int getImageViewFieldValue(Object object, String fieldName) {
 		int value = 0;
 		try {

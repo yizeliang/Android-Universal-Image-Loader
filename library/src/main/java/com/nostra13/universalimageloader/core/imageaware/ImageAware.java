@@ -62,6 +62,7 @@ public interface ImageAware {
 	View getWrappedView();
 
 	/**
+	 * 是否被回收
 	 * Returns a flag whether image aware view is collected by GC or whatsoever. If so then ImageLoader stop processing
 	 * of task for this image aware view and fires
 	 * {@link com.nostra13.universalimageloader.core.listener.ImageLoadingListener#onLoadingCancelled(String,
@@ -74,6 +75,7 @@ public interface ImageAware {
 	boolean isCollected();
 
 	/**
+	 * ImageView获取的hascode<br/>
 	 * Returns ID of image aware view. Point of ID is similar to Object's hashCode. This ID should be unique for every
 	 * image view instance and should be the same for same instances. This ID identifies processing task in ImageLoader
 	 * so ImageLoader won't process two image aware views with the same ID in one time. When ImageLoader get new task

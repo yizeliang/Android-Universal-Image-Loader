@@ -611,6 +611,7 @@ public final class ImageLoaderConfiguration {
         }
 
         private void initEmptyFieldsWithDefaultValues() {
+            //初始化线程池
             if (taskExecutor == null) {
                 taskExecutor = DefaultConfigurationFactory
                         .createExecutor(threadPoolSize, threadPriority, tasksProcessingType);
@@ -623,6 +624,8 @@ public final class ImageLoaderConfiguration {
             } else {
                 customExecutorForCachedImages = true;
             }
+
+            //创建默认硬盘缓存
             if (diskCache == null) {
                 if (diskCacheFileNameGenerator == null) {
                     diskCacheFileNameGenerator = DefaultConfigurationFactory.createFileNameGenerator();
@@ -630,18 +633,25 @@ public final class ImageLoaderConfiguration {
                 diskCache = DefaultConfigurationFactory
                         .createDiskCache(context, diskCacheFileNameGenerator, diskCacheSize, diskCacheFileCount);
             }
+            /**
+             * 创建默认内存缓存
+             */
             if (memoryCache == null) {
                 memoryCache = DefaultConfigurationFactory.createMemoryCache(context, memoryCacheSize);
             }
             if (denyCacheImageMultipleSizesInMemory) {
+                //如果需要缓存多种尺寸
                 memoryCache = new FuzzyKeyMemoryCache(memoryCache, MemoryCacheUtils.createFuzzyKeyComparator());
             }
+            //默认下载器
             if (downloader == null) {
                 downloader = DefaultConfigurationFactory.createImageDownloader(context);
             }
+            //默认解码器
             if (decoder == null) {
                 decoder = DefaultConfigurationFactory.createImageDecoder(writeLogs);
             }
+            //默认options
             if (defaultDisplayImageOptions == null) {
                 defaultDisplayImageOptions = DisplayImageOptions.createSimple();
             }

@@ -44,15 +44,24 @@ public abstract class BaseDiskCache implements DiskCache {
 	public static final int DEFAULT_COMPRESS_QUALITY = 100;
 
 	private static final String ERROR_ARG_NULL = " argument must be not null";
+	/**
+	 * 缓存文件后缀名
+	 */
 	private static final String TEMP_IMAGE_POSTFIX = ".tmp";
 
 	protected final File cacheDir;
 	protected final File reserveCacheDir;
 
+	/**
+	 * 文件名生成辅助类
+	 */
 	protected final FileNameGenerator fileNameGenerator;
 
 	protected int bufferSize = DEFAULT_BUFFER_SIZE;
 
+	/**
+	 * 默认图片编码格式
+	 */
 	protected Bitmap.CompressFormat compressFormat = DEFAULT_COMPRESS_FORMAT;
 	protected int compressQuality = DEFAULT_COMPRESS_QUALITY;
 
@@ -99,7 +108,8 @@ public abstract class BaseDiskCache implements DiskCache {
 	}
 
 	@Override
-	public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
+	public boolean save(String imageUri, InputStream imageStream,
+						IoUtils.CopyListener listener) throws IOException {
 		File imageFile = getFile(imageUri);
 		File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
 		boolean loaded = false;

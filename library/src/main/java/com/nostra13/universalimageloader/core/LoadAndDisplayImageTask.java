@@ -185,6 +185,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 任务是否暂停
+     *
      * @return <b>true</b> - if task should be interrupted; <b>false</b> - otherwise
      */
     private boolean waitIfPaused() {
@@ -208,6 +209,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 延迟时间
+     *
      * @return <b>true</b> - if task should be interrupted; <b>false</b> - otherwise
      */
     private boolean delayIfNeed() {
@@ -226,6 +228,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 加载图片数据(硬盘&网络)
+     *
      * @return
      * @throws TaskCancelledException
      */
@@ -280,6 +283,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 从网络加载图片
+     *
      * @param imageUri
      * @return
      * @throws IOException
@@ -293,6 +297,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 加载成功,缓存文件放入本地磁盘
+     *
      * @return <b>true</b> - if image was downloaded successfully; <b>false</b> - otherwise
      */
     private boolean tryCacheImageOnDisk() throws TaskCancelledException {
@@ -318,6 +323,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 下载文件到磁盘
+     *
      * @return
      * @throws IOException
      */
@@ -373,6 +379,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 处理进度事件
+     *
      * @return <b>true</b> - if loading should be continued; <b>false</b> - if loading should be interrupted
      */
     private boolean fireProgressEvent(final int current, final int total) {
@@ -391,6 +398,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 处理失败的事件
+     *
      * @param failType
      * @param failCause
      */
@@ -400,7 +408,8 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
             @Override
             public void run() {
                 if (options.shouldShowImageOnFail()) {
-                    imageAware.setImageDrawable(options.getImageOnFail(configuration.resources));
+                    DefaultImgDisplayHelper.displayDefaultImg(configuration, options,
+                            imageAware, LoadedFrom.DEFAULT_FAIL);
                 }
                 listener.onLoadingFailed(uri, imageAware.getWrappedView(), new FailReason(failType, failCause));
             }
@@ -425,6 +434,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 根据网络环境获取不同的下载器
+     *
      * @return
      */
     private ImageDownloader getDownloader() {
@@ -441,6 +451,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 检查View是否可用
+     *
      * @throws TaskCancelledException if task is not actual (target ImageAware is collected by GC or the image URI of
      *                                this task doesn't match to image URI which is actual for current ImageAware at
      *                                this moment)
@@ -471,6 +482,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * view是否被回收
+     *
      * @return <b>true</b> - if target ImageAware is collected by GC; <b>false</b> - otherwise
      */
     private boolean isViewCollected() {
@@ -509,6 +521,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 加载是否被终止
+     *
      * @throws TaskCancelledException if current task was interrupted
      */
     private void checkTaskInterrupted() throws TaskCancelledException {
@@ -519,6 +532,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 
     /**
      * 任务被暂停?
+     *
      * @return <b>true</b> - if current task was interrupted; <b>false</b> - otherwise
      */
     private boolean isTaskInterrupted() {

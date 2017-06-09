@@ -37,6 +37,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.sample.Constants;
 import com.nostra13.universalimageloader.sample.R;
+import com.nostra13.universalimageloader.utils.BitmapUtils;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -88,6 +89,8 @@ public class ImageListFragment extends AbsListViewBaseFragment {
 					.cacheInMemory(true)
 					.cacheOnDisk(true)
 					.considerExifParams(true)
+					.shouldProcessDefaultImg(true)
+					.shouldUseDisplayerDefaultImg(true)
 					.displayer(new CircleBitmapDisplayer(Color.WHITE, 5))
 					.build();
 		}
@@ -123,8 +126,7 @@ public class ImageListFragment extends AbsListViewBaseFragment {
 
 			holder.text.setText("Item " + (position + 1));
 
-			ImageLoader.getInstance().displayImage(IMAGE_URLS[position], holder.image, options, animateFirstListener);
-
+			ImageLoader.getInstance().displayImage(IMAGE_URLS[position], holder.image, options);
 			return view;
 		}
 	}

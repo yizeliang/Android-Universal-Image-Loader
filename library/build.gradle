@@ -10,7 +10,7 @@ android {
         minSdkVersion 5
         targetSdkVersion 22
         versionCode 200
-        versionName "2.0"
+        versionName "2.0.1"
     }
 
 }

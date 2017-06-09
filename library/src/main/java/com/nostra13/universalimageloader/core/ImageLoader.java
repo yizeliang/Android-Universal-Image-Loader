@@ -35,6 +35,7 @@ import com.nostra13.universalimageloader.core.imageaware.NonViewAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.utils.BitmapUtils;
 import com.nostra13.universalimageloader.utils.ImageSizeUtils;
 import com.nostra13.universalimageloader.utils.L;
 import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
@@ -260,12 +261,10 @@ public class ImageLoader {
 
         if (TextUtils.isEmpty(uri)) {
             engine.cancelDisplayTaskFor(imageAware);
+            //取消之前的队列
             listener.onLoadingStarted(uri, imageAware.getWrappedView());
-            if (options.shouldShowImageForEmptyUri()) {
-                imageAware.setImageDrawable(options.getImageForEmptyUri(configuration.resources));
-            } else {
-                imageAware.setImageDrawable(null);
-            }
+            DefaultImgDisplayHelper.displayDefaultImg(configuration,options,
+                    imageAware,LoadedFrom.DEFAULT_EMPTY_URL);
             listener.onLoadingComplete(uri, imageAware.getWrappedView(), null);
             return;
         }
@@ -308,7 +307,8 @@ public class ImageLoader {
         } else {
             if (options.shouldShowImageOnLoading()) {
                 //显示加载中的图片
-                imageAware.setImageDrawable(options.getImageOnLoading(configuration.resources));
+                DefaultImgDisplayHelper.displayDefaultImg(configuration,options,
+                        imageAware,LoadedFrom.DEFAULT_LOADING);
             } else if (options.isResetViewBeforeLoading()) {
                 //加载前重置View,其实就是清空原有图片
                 imageAware.setImageDrawable(null);

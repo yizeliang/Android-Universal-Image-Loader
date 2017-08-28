@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.yizeliang'
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        minSdkVersion 5
+        targetSdkVersion 22
+        versionCode 200
+        versionName "2.0.1"
+    }
+
+}
+
+dependencies {
+    testCompile 'org.robolectric:robolectric:3.0-rc3'
+    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+}
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
